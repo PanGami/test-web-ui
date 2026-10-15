@@ -23,9 +23,12 @@
 
 .progressLine {
   width: 1px;
-  height: 0%; /* GSAP scrubs this to 100% in Stage 3 */
+  height: 100%;            /* always full height — GSAP animates scaleY, not height */
   background: var(--ink);
+  transform: scaleY(0);    /* start collapsed; GSAP scrubs to scaleY(1) */
   transform-origin: top;
+  /* will-change lets the compositor handle this without triggering layout */
+  will-change: transform;
 }
 
 /* ── Items ───────────────────────────────────────────────────────────────── */
@@ -40,6 +43,10 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  /* Start dimmed — GSAP scrubs opacity 0.35 → 1 as item crosses viewport center.
+     CSS default is 0.35 so the visual state is correct before JS runs.
+     Reduced-motion path: GSAP uses a simple fade-in instead. */
+  opacity: 0.35;
 }
 
 .item:first-child {
@@ -118,6 +125,18 @@
   color: var(--muted);
   border: var(--border);
   padding: 0.2em 0.6em;
+}
+
+/* ── Reduced-motion / no-JS fallback ────────────────────────────────────── */
+/* Items must be fully visible if GSAP doesn't run */
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    opacity: 1;
+  }
+
+  .progressLine {
+    transform: scaleY(1);  /* show full line statically */
+  }
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
