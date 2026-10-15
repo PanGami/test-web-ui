@@ -9,8 +9,9 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // ── Global GSAP defaults ────────────────────────────────────────────────────
 // These are the "house rules" every animation should follow.
@@ -31,4 +32,4 @@ export const DUR_FAST = 0.6;
 export const DUR_HOVER = 0.22;
 export const STAGGER = 0.08;
 
-export { gsap, ScrollTrigger };
+export { gsap, ScrollTrigger, ScrollToPlugin };

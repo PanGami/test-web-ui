@@ -8,7 +8,7 @@
   z-index: var(--z-nav);
   background: var(--ivory);
   border-bottom: var(--border);
-  /* will-change so compositor doesn't repaint on hide/show */
+  /* will-change: compositor can promote to its own layer for translateY hide/show */
   will-change: transform;
 }
 
@@ -27,6 +27,12 @@
   color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
+  /* Hover: subtle opacity shift — GSAP handles translateY on click */
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.logo:hover {
+  opacity: 0.6;
 }
 
 .list {
@@ -44,7 +50,8 @@
   letter-spacing: var(--tracking-label);
   color: var(--muted);
   text-decoration: none;
-  padding-bottom: 2px;
+  padding-bottom: 3px;
+  /* Color transition for hover */
   transition: color var(--duration-fast) var(--ease-out);
 }
 
@@ -52,26 +59,41 @@
   color: var(--ink);
 }
 
-/* Active underline — a thin line that slides between nav items */
+/* Active state: color set immediately; underline driven by GSAP scaleX */
 .link.active {
   color: var(--ink);
 }
 
-.link.active::after {
-  transform: scaleX(1);
-}
-
-.link::after {
-  content: "";
+/* ── Indicator span (real DOM child, GSAP animates scaleX) ──────────────── */
+/*
+ * Each nav link contains a <span class="indicator" aria-hidden="true">.
+ * This replaces the ::after pseudo-element approach so GSAP can target it directly.
+ * GSAP sets scaleX(0|1) with transformOrigin. CSS handles the hover wipe for
+ * non-active links via transition; active links have GSAP-only transitions.
+ */
+.indicator {
+  display: block;
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   right: 0;
   height: 1px;
   background: var(--ink);
   transform: scaleX(0);
-  transform-origin: left;
+  transform-origin: left center;
+  /* transition for CSS hover wipe (non-active links) */
   transition: transform var(--duration-fast) var(--ease-out);
+  pointer-events: none;
+}
+
+/* Hover wipe — show indicator on hover for non-active links */
+.link:not(.active):hover .indicator {
+  transform: scaleX(1);
+}
+
+/* Active link indicator: GSAP manages scaleX, so disable CSS transition */
+.link.active .indicator {
+  transition: none;
 }
 
 /* Hamburger — visible only on small screens */
@@ -83,6 +105,12 @@
   padding: 0.25rem;
   color: var(--ink);
   line-height: 1;
+  /* Hover */
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.menuBtn:hover {
+  opacity: 0.6;
 }
 
 /* ── Mobile nav ──────────────────────────────────────────────────────────── */
@@ -109,5 +137,16 @@
 
   .link {
     font-size: 1.125rem;
+  }
+}
+
+/* ── Reduced-motion: no transitions ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .nav,
+  .link,
+  .indicator,
+  .logo,
+  .menuBtn {
+    transition: none !important;
   }
 }
