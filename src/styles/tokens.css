@@ -1,0 +1,47 @@
+/* ─── tokens.css ──────────────────────────────────────────────────────────────
+   Design tokens for the portfolio.
+   All colors, type scale, spacing, easing, and z-index values live here.
+   Never hard-code values elsewhere — always reference a token.
+─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Colors ─────────────────────────────────────────────────────────────── */
+  --ink: #111111;
+  --ivory: #f6f5f1;
+  --muted: rgba(17, 17, 17, 0.55);
+  --line: rgba(17, 17, 17, 0.1);
+  --accent: #b08d2e;
+
+  /* ── Typography ─────────────────────────────────────────────────────────── */
+  --font: "Inter", system-ui, sans-serif;
+
+  --text-display: clamp(3rem, 7vw, 6rem);   /* 48px → 96px */
+  --text-h2: clamp(2rem, 4vw, 3.5rem);      /* 32px → 56px */
+  --text-h3: clamp(1.25rem, 2vw, 1.5rem);   /* 20px → 24px */
+  --text-body: clamp(1rem, 1.1vw, 1.125rem);/* 16px → 18px */
+  --text-label: 0.75rem;                     /* 12px */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+
+  --leading-tight: 1.1;
+  --leading-body: 1.65;
+  --tracking-label: 0.12em;
+
+  /* ── Spacing ─────────────────────────────────────────────────────────────── */
+  --section-gap: clamp(6rem, 12vw, 10rem);  /* vertical rhythm between sections */
+  --container-max: 1200px;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+
+  /* ── Borders ─────────────────────────────────────────────────────────────── */
+  --border: 1px solid var(--line);
+
+  /* ── Z-index ─────────────────────────────────────────────────────────────── */
+  --z-preloader: 9000;
+  --z-nav: 1000;
+  --z-base: 1;
+
+  /* ── Transitions (for non-GSAP micro-interactions) ──────────────────────── */
+  --duration-fast: 200ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
