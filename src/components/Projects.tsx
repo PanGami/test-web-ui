@@ -1,17 +1,56 @@
 /**
  * Projects.tsx
- * Project grid — up to 3 cards from content.ts.
- * Layout degrades gracefully: 1 col (mobile) → 2 col (tablet) → 3 col (desktop).
- * TODO placeholder cards are visually distinguished with an accent border tag.
+ * Animations:
+ *   1. SectionHeading: label fade, h2 rise, rule draw.
+ *   2. Cards: staggered fade + rise, triggered on the grid container.
  */
 
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "../animations/registerGsap";
+import { revealHeading, revealFrom } from "../animations/reveal";
 import { projects } from "../data/content";
 import SectionHeading from "./SectionHeading";
 import styles from "./Projects.module.css";
 
+gsap.registerPlugin(useGSAP);
+
 export default function Projects() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const labelEl = section.querySelector<Element>("[data-heading-label]")!;
+      const titleEl = section.querySelector<Element>("[data-heading-title]")!;
+      const ruleEl  = section.querySelector<Element>("[data-heading-rule]")!;
+      const cards   = section.querySelectorAll<Element>("[data-project-card]");
+
+      const mm = gsap.matchMedia();
+      mm.add(
+        { full: "(prefers-reduced-motion: no-preference)", reduced: "(prefers-reduced-motion: reduce)" },
+        (ctx) => {
+          const rm = !(ctx.conditions as { full: boolean }).full;
+
+          revealHeading(labelEl, titleEl, ruleEl, section, rm);
+
+          // Cards stagger in as the grid enters view
+          revealFrom(Array.from(cards), section, {
+            y: 32,
+            stagger: 0.08,
+            start: "top 80%",
+            reducedMotion: rm,
+          });
+        }
+      );
+    },
+    { scope: sectionRef, dependencies: [] }
+  );
+
   return (
-    <section id="projects" aria-label="Selected projects">
+    <section id="projects" ref={sectionRef} aria-label="Selected projects">
       <div className="container">
         <SectionHeading label="Work" title="Selected projects" />
 
@@ -19,7 +58,12 @@ export default function Projects() {
           {projects.map((project, i) => {
             const isTodo = project.title.startsWith("TODO");
             return (
-              <article key={i} className={styles.card} aria-label={project.title}>
+              <article
+                key={i}
+                className={styles.card}
+                aria-label={project.title}
+                data-project-card=""
+              >
                 <span className={styles.cardNumber}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
