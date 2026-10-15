@@ -1,27 +1,42 @@
 /**
  * Hero.tsx
  * Full-viewport hero section.
- * Static markup — GSAP line-mask reveal and scroll hint animation added in Stage 3.
  *
- * Layout:
- *   - Left col: large h1 display name
- *   - Right col (md+): job title, tagline, CTA
- *   - Scroll hint at the bottom
+ * Exposes a ref (forwardRef) to the section root so the master entrance
+ * timeline in App.tsx can scope its GSAP selectors inside it.
+ *
+ * Data attributes used by the animation (no CSS-module class leakage):
+ *   [data-hero-title]    — the h1 container whose children are line-inners
+ *   [data-hero-meta]     — the right-column wrapper (job title, tagline, CTA)
+ *   [data-hero-scroll]   — the scroll hint row
+ *
+ * No-JS / reduced-motion fallback:
+ *   All elements have full visibility in CSS. GSAP hides them via gsap.set()
+ *   synchronously on mount before the first paint, then reveals them in the
+ *   timeline. If JS never runs, everything is already visible.
  */
 
+import { forwardRef } from "react";
 import { hero } from "../data/content";
 import styles from "./Hero.module.css";
 
-export default function Hero() {
+const Hero = forwardRef<HTMLElement>(function Hero(_props, ref) {
   return (
-    <section id="hero" className={styles.section} aria-label="Introduction">
+    <section
+      ref={ref}
+      id="hero"
+      className={styles.section}
+      aria-label="Introduction"
+    >
       <div className="container">
         <div className={styles.inner}>
-          {/* Display name — split into lines by GSAP in Stage 3 */}
-          <h1 className={styles.title}>{hero.name}</h1>
+          {/* h1 — splitLines.ts will replace its children with line-mask spans */}
+          <h1 className={styles.title} data-hero-title="">
+            {hero.name}
+          </h1>
 
-          {/* Right column: role + tagline + CTA */}
-          <div className={styles.meta}>
+          {/* Right column */}
+          <div className={styles.meta} data-hero-meta="">
             <p className={styles.jobTitle}>{hero.title}</p>
             <p className={styles.tagline}>{hero.tagline}</p>
             <a href={hero.cta.href} className={styles.cta}>
@@ -31,11 +46,14 @@ export default function Hero() {
         </div>
 
         {/* Scroll hint */}
-        <div className={styles.scrollHint} aria-hidden="true">
+        <div className={styles.scrollHint} aria-hidden="true" data-hero-scroll="">
           <span className={styles.scrollLine} />
           <span>{hero.scrollHint}</span>
         </div>
       </div>
     </section>
   );
-}
+});
+
+Hero.displayName = "Hero";
+export default Hero;

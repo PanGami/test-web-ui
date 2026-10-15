@@ -19,14 +19,16 @@
 
 /* The h1 line masks are set up by splitLines.ts; overflow hidden on each
    .line-mask is injected dynamically. We pre-set overflow on the container
-   so the element has correct dimensions before JS runs. */
+   so the element has correct dimensions before JS runs.
+   NOTE: do NOT set visibility/opacity here — GSAP does that via gsap.set()
+   before the first paint, which is the correct FOUC-prevention pattern.
+   No-JS fallback: elements stay fully visible (no CSS hides them). */
 .title {
   font-size: var(--text-display);
   font-weight: var(--weight-medium);
   line-height: var(--leading-tight);
   color: var(--ink);
   white-space: pre-line; /* respect \n in content.ts */
-  /* autoAlpha: 0 will be set by GSAP; set visible here so SSR/no-JS works */
 }
 
 .meta {
