@@ -1,0 +1,68 @@
+/* ─── Contact.module.css ───────────────────────────────────────────────────── */
+
+.inner {
+  max-width: 48rem;
+}
+
+.body {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  margin-bottom: 2.5rem;
+  max-width: 58ch;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.link {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.linkLabel {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+}
+
+.linkValue {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: var(--weight-medium);
+  color: var(--ink);
+  position: relative;
+  padding-bottom: 3px;
+  align-self: flex-start;
+}
+
+.linkValue::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.link:hover .linkValue::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (min-width: 600px) {
+  .links {
+    flex-direction: row;
+    gap: 4rem;
+  }
+}

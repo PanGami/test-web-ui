@@ -1,0 +1,111 @@
+/* ─── Hero.module.css ──────────────────────────────────────────────────────── */
+
+.section {
+  min-height: 100svh; /* safe area aware */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* No extra padding-top — main already clears the nav.
+     The section uses the full viewport from nav-bottom. */
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* The h1 line masks are set up by splitLines.ts; overflow hidden on each
+   .line-mask is injected dynamically. We pre-set overflow on the container
+   so the element has correct dimensions before JS runs. */
+.title {
+  font-size: var(--text-display);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+  white-space: pre-line; /* respect \n in content.ts */
+  /* autoAlpha: 0 will be set by GSAP; set visible here so SSR/no-JS works */
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 52ch;
+}
+
+.jobTitle {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+}
+
+.tagline {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  white-space: pre-line;
+}
+
+.cta {
+  display: inline-block;
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--ink);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+  align-self: flex-start;
+}
+
+/* Underline wipe — CSS-only version; GSAP will replace with scaleX in Stage 3 */
+.cta::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.cta:hover::after {
+  transform: scaleX(0.6);
+  transform-origin: right;
+}
+
+.scrollHint {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: clamp(3rem, 6vw, 5rem);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+}
+
+.scrollLine {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--muted);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: flex-end;
+    gap: 3rem;
+  }
+}

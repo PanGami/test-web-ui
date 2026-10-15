@@ -68,6 +68,11 @@ body {
   padding-inline: var(--gutter);
 }
 
+/* ── Main content — clear the fixed nav bar (56px + 4px buffer) ─────────── */
+main {
+  padding-top: 3.75rem; /* 60px — matches nav height */
+}
+
 /* ── Section defaults ────────────────────────────────────────────────────── */
 section {
   padding-block: var(--section-gap);

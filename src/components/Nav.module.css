@@ -1,0 +1,113 @@
+/* ─── Nav.module.css ───────────────────────────────────────────────────────── */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  background: var(--ivory);
+  border-bottom: var(--border);
+  /* will-change so compositor doesn't repaint on hide/show */
+  will-change: transform;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.5rem; /* 56px */
+}
+
+.logo {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  list-style: none;
+}
+
+.link {
+  position: relative;
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.link:hover {
+  color: var(--ink);
+}
+
+/* Active underline — a thin line that slides between nav items */
+.link.active {
+  color: var(--ink);
+}
+
+.link.active::after {
+  transform: scaleX(1);
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+/* Hamburger — visible only on small screens */
+.menuBtn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  color: var(--ink);
+  line-height: 1;
+}
+
+/* ── Mobile nav ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .list {
+    display: none;
+    position: fixed;
+    inset: 3.5rem 0 0 0;
+    background: var(--ivory);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    border-top: var(--border);
+  }
+
+  .list.open {
+    display: flex;
+  }
+
+  .menuBtn {
+    display: block;
+  }
+
+  .link {
+    font-size: 1.125rem;
+  }
+}

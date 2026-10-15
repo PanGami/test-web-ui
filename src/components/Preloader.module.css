@@ -1,0 +1,24 @@
+/* ─── Preloader.module.css ─────────────────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  background: var(--ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  /* Hidden in static/no-GSAP state so it doesn't block content.
+     GSAP will set autoAlpha=1 at the start of the preloader timeline in Stage 3. */
+  visibility: hidden;
+  opacity: 0;
+}
+
+.name {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  line-height: 1;
+}

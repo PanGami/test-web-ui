@@ -1,0 +1,139 @@
+/* ─── Experience.module.css ────────────────────────────────────────────────── */
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* ── Timeline track ──────────────────────────────────────────────────────── */
+.track {
+  /* Hidden on mobile, visible on md+ as a left sidebar */
+  display: none;
+}
+
+.progressWrap {
+  position: sticky;
+  top: 5rem;
+  width: 1px;
+  height: calc(100vh - 6rem);
+  background: var(--line);
+  margin-inline: auto;
+}
+
+.progressLine {
+  width: 1px;
+  height: 0%; /* GSAP scrubs this to 100% in Stage 3 */
+  background: var(--ink);
+  transform-origin: top;
+}
+
+/* ── Items ───────────────────────────────────────────────────────────────── */
+.items {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  padding-block: clamp(2rem, 4vw, 3rem);
+  border-bottom: var(--border);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.item:first-child {
+  padding-top: 0;
+}
+
+.itemMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.period {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+}
+
+.role {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-medium);
+  color: var(--ink);
+  margin-top: 0.25rem;
+}
+
+.company {
+  font-size: var(--text-body);
+  color: var(--ink);
+}
+
+.type {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.bullet {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.bullet::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.tag {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border: var(--border);
+  padding: 0.2em 0.6em;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 2rem 1fr;
+    gap: 0 3rem;
+  }
+
+  .track {
+    display: block;
+  }
+
+  .item {
+    grid-template-columns: minmax(9rem, 14rem) 1fr;
+    gap: 0 3rem;
+    align-items: start;
+  }
+}

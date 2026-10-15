@@ -1,0 +1,77 @@
+/* ─── About.module.css ─────────────────────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(3rem, 6vw, 5rem);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.paragraph {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  max-width: 68ch;
+}
+
+.location {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+/* ── Highlights ──────────────────────────────────────────────────────────── */
+.highlights {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.highlight {
+  padding-top: 1.25rem;
+  border-top: var(--border);
+}
+
+.number {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.highlightLabel {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+  margin-top: 0.5rem;
+  display: block;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: start;
+  }
+
+  .highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .highlights {
+    grid-template-columns: 1fr;
+  }
+}

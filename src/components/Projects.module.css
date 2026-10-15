@@ -1,0 +1,142 @@
+/* ─── Projects.module.css ──────────────────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.card {
+  padding-block: clamp(2rem, 4vw, 3rem);
+  border-bottom: var(--border);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.cardNumber {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+}
+
+.cardTitle {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-medium);
+  color: var(--ink);
+}
+
+.cardProblem {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  max-width: 60ch;
+}
+
+.cardRole {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border: var(--border);
+  padding: 0.2em 0.6em;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--ink);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  align-self: flex-start;
+}
+
+.cardLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.cardLink:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+/* TODO badge */
+.todo {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.2em 0.6em;
+  align-self: flex-start;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card:nth-child(odd) {
+    border-right: var(--border);
+    padding-right: clamp(2rem, 4vw, 3rem);
+  }
+
+  .card:nth-child(even) {
+    padding-left: clamp(2rem, 4vw, 3rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .card {
+    border-right: var(--border);
+    padding-right: clamp(2rem, 3vw, 2.5rem);
+    padding-left: clamp(2rem, 3vw, 2.5rem);
+  }
+
+  .card:first-child {
+    padding-left: 0;
+  }
+
+  .card:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,32 @@
+/* ─── SectionHeading.module.css ──────────────────────────────────────────── */
+
+.heading {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.label {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: var(--text-h2);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+/* Hairline that draws under the heading */
+.rule {
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+  border: none;
+  margin-top: 1.5rem;
+}
