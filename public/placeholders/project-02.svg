@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#f6f5f1"/>
+  <!-- Geometric composition: diagonal grid, offset rectangles -->
+  <rect x="400" y="80" width="800" height="500" fill="none" stroke="#111111" stroke-width="1"/>
+  <rect x="440" y="120" width="720" height="420" fill="#111111" opacity="0.04"/>
+  <rect x="480" y="160" width="640" height="340" fill="none" stroke="#111111" stroke-width="1" opacity="0.3"/>
+  <!-- Diagonal lines -->
+  <line x1="160" y1="80"  x2="1440" y2="660" stroke="#111111" stroke-width="1" opacity="0.1"/>
+  <line x1="160" y1="160" x2="1440" y2="740" stroke="#111111" stroke-width="1" opacity="0.07"/>
+  <line x1="160" y1="240" x2="1440" y2="820" stroke="#111111" stroke-width="1" opacity="0.07"/>
+  <!-- Label -->
+  <text x="800" y="790" font-family="system-ui,sans-serif" font-size="14" font-weight="500"
+        text-anchor="middle" letter-spacing="0.12em" fill="#111111" opacity="0.4">PLACEHOLDER 02</text>
+</svg>

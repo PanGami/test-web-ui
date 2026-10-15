@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#f6f5f1"/>
+  <!-- Geometric composition: large ink rectangle, ruled lines, circle -->
+  <rect x="160" y="120" width="640" height="400" fill="none" stroke="#111111" stroke-width="1"/>
+  <rect x="200" y="160" width="560" height="320" fill="#111111" opacity="0.06"/>
+  <circle cx="820" cy="320" r="180" fill="none" stroke="#111111" stroke-width="1"/>
+  <line x1="160" y1="600" x2="1440" y2="600" stroke="#111111" stroke-width="1" opacity="0.15"/>
+  <line x1="160" y1="640" x2="1440" y2="640" stroke="#111111" stroke-width="1" opacity="0.08"/>
+  <line x1="160" y1="680" x2="1440" y2="680" stroke="#111111" stroke-width="1" opacity="0.08"/>
+  <!-- Label -->
+  <text x="800" y="790" font-family="system-ui,sans-serif" font-size="14" font-weight="500"
+        text-anchor="middle" letter-spacing="0.12em" fill="#111111" opacity="0.4"
+        text-transform="uppercase">PLACEHOLDER 01</text>
+</svg>

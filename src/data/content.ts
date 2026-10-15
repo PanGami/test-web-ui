@@ -179,7 +179,7 @@ export const projects: ProjectItem[] = [
     stack: ["TODO", "Stack", "Here"],
     role: "TODO: Your role (e.g. Sole engineer, Lead backend)",
     link: undefined,
-    image: undefined,
+    image: "/placeholders/project-01.svg",
   },
   {
     // TODO: replace with real project
@@ -188,7 +188,7 @@ export const projects: ProjectItem[] = [
     stack: ["TODO", "Stack", "Here"],
     role: "TODO: Your role",
     link: undefined,
-    image: undefined,
+    image: "/placeholders/project-02.svg",
   },
   {
     // TODO: replace with real project
@@ -197,7 +197,7 @@ export const projects: ProjectItem[] = [
     stack: ["TODO", "Stack", "Here"],
     role: "TODO: Your role",
     link: undefined,
-    image: undefined,
+    image: "/placeholders/project-03.svg",
   },
 ];
 
